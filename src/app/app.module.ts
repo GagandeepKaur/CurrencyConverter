@@ -7,14 +7,17 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { DisclaimerComponent } from './app/disclaimer/disclaimer.component';
 import { CurrencyContainerComponent } from './app/currency-container/currency-container.component';
-
+import {MyCurrencyFormatterDirective} from './app/currency-container/currency-formatter';
+import {MyCurrencyPipe} from './app/currency-container/my-currency.pipe';
 
 
 @NgModule({
     declarations: [
         AppComponent,
         DisclaimerComponent,
-        CurrencyContainerComponent
+        CurrencyContainerComponent,
+        MyCurrencyFormatterDirective,
+        MyCurrencyPipe
     ],
 
     imports: [
@@ -27,4 +30,3 @@ import { CurrencyContainerComponent } from './app/currency-container/currency-co
     bootstrap: [AppComponent]
 })
 export class AppModule { }
-

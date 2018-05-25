@@ -1,28 +1,36 @@
 import { Component } from '@angular/core';
 import { DataService } from 'app/app.service';
 import { OnInit } from '@angular/core';
+import { MyCurrencyFormatterDirective } from "./currency-formatter";
+import {MyCurrencyPipe} from './my-currency.pipe'
 import 'rxjs';
 
 @Component({
   selector: 'app-currency-container',
   templateUrl: './currency-container.component.html',
-  styleUrls: ['./currency-container.component.css']
+  styleUrls: ['./currency-container.component.css'],
+  providers: [
+    MyCurrencyPipe,
+    MyCurrencyFormatterDirective
+  ]
 })
 export class CurrencyContainerComponent implements OnInit {
   title: string = 'Currency Converter';
   error: any = null;
-  fromAmount: number = 10;
+  fromAmount: any = 10;
   toAmount: number = 0.0;
   fromCurrency: string = null;
   toCurrency: string = null;
   rates: Array<any> = [];
   fromRates: Object = {};
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private mycurpipe: MyCurrencyPipe) {
+    //this.fromAmount = this.mycurpipe.transform(1234567.89);
+  }
 
   ngOnInit() {
       this.convert(false, true);
   }
-
+  
   public convert(reverse, initial) {
       this.dataService.getRates(this.fromCurrency).then(response => {
 
